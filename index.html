@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     
 </head>
 <body id="teclado">
@@ -18,6 +19,10 @@
             </div>
             <button class="col-2" onclick="display.borrarTodo()">C</button>
             <button onclick="display.borrar()">&larr;</button>
+            <button class="operador" value="raiz">√x</button>
+            <button class="operador" value="potencia">X <sup>y</sup></button>
+            <button class="numero" value="Pi">π</button>
+            <button class="operador" value="logaritmo">log</button>
             <button class="operador" value="dividir">/</button>
             <button class="numero">7</button>
             <button class="numero">8</button>

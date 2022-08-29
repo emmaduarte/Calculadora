@@ -21,7 +21,7 @@ body {
 .calculadora{
     display: grid;
     grid-template-columns: repeat(4, 75px);
-    grid-template-rows: 160px repeat(5, 75px);
+    grid-template-rows: 160px repeat(6, 75px);
     background-color: #00916e;
     padding: 15px;
     border-radius: 32px;

@@ -10,7 +10,10 @@ class Display {
             sumar: '+',
             restar: '-',
             multiplicar: '*',
-            dividir: '/'
+            dividir: '/',
+            potencia: '^',
+            raiz: '√',
+            logaritmo:'log'
         }
     }
 
@@ -36,6 +39,10 @@ class Display {
 
     agregarNumero(numero){
         if(numero === '.' && this.valorActual.includes('.')) return
+        if(numero === 'π') {
+            this.valorActual = this.calculador.valorpi().toString()
+            return
+        }
         this.valorActual = this.valorActual.toString() + numero.toString()
         this.imprimirValores()
     }
@@ -46,6 +53,15 @@ class Display {
     }
 
     calcular(){
+        //no funciona la raiz ni el log y problemas con los decimales
+        if(this.valorAnterior === '√') {
+            this.valorActual = this.calculador.raiz(parseFloat(this.valorActual))
+            return
+        }
+        if(this.valorAnterior === 'log') {
+            this.valorActual = this.calculador.logaritmo(parseFloat(this.valorActual))
+            return
+        }
         const valorAnterior = parseFloat(this.valorAnterior)
         const valorActual = parseFloat(this.valorActual)
 
@@ -77,5 +93,8 @@ class Display {
         if (k==32 || k==13) {this.computar()} //Tecla igual: intro o barra espaciadora
         if (k==46) {this.borrarTodo()} //Tecla borrado total: "supr"
         if (k==8) {this.borrar()} //Retroceso en escritura : tecla retroceso.
+        if (k>64 && k<91){
+            swal('Ingreso Incorrecto', 'Ingresa un numero u operando', 'error')
+        }
         }
 }
