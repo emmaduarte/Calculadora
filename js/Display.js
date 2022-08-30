@@ -41,6 +41,7 @@ class Display {
         if(numero === '.' && this.valorActual.includes('.')) return
         if(numero === 'π') {
             this.valorActual = this.calculador.valorpi().toString()
+            this.imprimirValores()
             return
         }
         this.valorActual = this.valorActual.toString() + numero.toString()
@@ -53,20 +54,41 @@ class Display {
     }
 
     calcular(){
-        //no funciona la raiz ni el log y problemas con los decimales
-        if(this.valorAnterior === '√') {
-            this.valorActual = this.calculador.raiz(parseFloat(this.valorActual))
-            return
-        }
-        if(this.valorAnterior === 'log') {
-            this.valorActual = this.calculador.logaritmo(parseFloat(this.valorActual))
-            return
-        }
         const valorAnterior = parseFloat(this.valorAnterior)
         const valorActual = parseFloat(this.valorActual)
+        
+
+        if(this.tipoOperacion === 'raiz') {
+            const r = this.calculador.raiz(parseFloat(this.valorActual))
+            if (r % 1 == 0) {
+                this.valorActual = r
+                return
+            } else {
+                this.valorActual = r.toFixed(2)
+                return
+            }
+        }
+        if(this.tipoOperacion === 'logaritmo') {
+            const l = this.calculador.logaritmo(parseFloat(this.valorActual))
+            if (l % 1 == 0) {
+                this.valorActual = r
+                return
+            } else {
+                this.valorActual = r.toFixed(2)
+                return
+            }
+        }
+   
 
         if( isNaN(valorActual) || isNaN(valorAnterior)) return
-        this.valorActual = this.calculador[this.tipoOperacion](valorAnterior, valorActual)
+        const num3 = this.calculador[this.tipoOperacion](valorAnterior, valorActual)
+        if (num3 % 1 == 0) {
+            this.valorActual = num3
+            return
+        } else {
+            this.valorActual = num3.toFixed(2)
+            return
+        }
     }
 
 
