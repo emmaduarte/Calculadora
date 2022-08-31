@@ -71,10 +71,10 @@ class Display {
         if(this.tipoOperacion === 'logaritmo') {
             const l = this.calculador.logaritmo(parseFloat(this.valorActual))
             if (l % 1 == 0) {
-                this.valorActual = r
+                this.valorActual = l
                 return
             } else {
-                this.valorActual = r.toFixed(2)
+                this.valorActual = l.toFixed(2)
                 return
             }
         }
