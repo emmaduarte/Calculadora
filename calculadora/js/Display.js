@@ -57,7 +57,8 @@ class Display {
         const valorAnterior = parseFloat(this.valorAnterior)
         const valorActual = parseFloat(this.valorActual)
         
-
+        if( isNaN(valorActual) || isNaN(valorAnterior)) return
+        
         if(this.tipoOperacion === 'raiz') {
             const r = this.calculador.raiz(parseFloat(this.valorActual))
             if (r % 1 == 0) {
@@ -80,7 +81,7 @@ class Display {
         }
    
 
-        if( isNaN(valorActual) || isNaN(valorAnterior)) return
+        
         const num3 = this.calculador[this.tipoOperacion](valorAnterior, valorActual)
         if (num3 % 1 == 0) {
             this.valorActual = num3
