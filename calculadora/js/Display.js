@@ -30,7 +30,9 @@ class Display {
     }
     
     computar(tipo){
+        /*if(tipo === 'igual') this.calcular()*/
         this.tipoOperacion !== 'igual' && this.calcular()
+        if(this.valorActual !== '' && tipo === 'raiz') swal('Datos Incorrecto', 'Ingresa una operacion valida', 'error')
         this.tipoOperacion = tipo
         this.valorAnterior = this.valorActual || this.valorAnterior
         this.valorActual = ''
@@ -57,8 +59,8 @@ class Display {
         const valorAnterior = parseFloat(this.valorAnterior)
         const valorActual = parseFloat(this.valorActual)
         
-        if( isNaN(valorActual) || isNaN(valorAnterior)) return
-        
+        if( isNaN(valorActual) || isNaN(valorAnterior)) return 
+
         if(this.tipoOperacion === 'raiz') {
             const r = this.calculador.raiz(parseFloat(this.valorActual))
             if (r % 1 == 0) {
@@ -90,6 +92,7 @@ class Display {
             this.valorActual = num3.toFixed(2)
             return
         }
+
     }
 
 
@@ -113,7 +116,7 @@ class Display {
         if (k==107) {this.computar('sumar')} //tecla suma
         if (k==109) {this.computar('restar')} //tecla resta
         if (k==111) {this.computar('dividir')} //tecla división
-        if (k==32 || k==13) {this.computar()} //Tecla igual: intro o barra espaciadora
+        if (k==32 || k==13) {this.computar('igual')} //Tecla igual: intro o barra espaciadora
         if (k==46) {this.borrarTodo()} //Tecla borrado total: "supr"
         if (k==8) {this.borrar()} //Retroceso en escritura : tecla retroceso.
         if (k>64 && k<91){
