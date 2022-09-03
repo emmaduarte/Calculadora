@@ -33,6 +33,8 @@ class Display {
         /*if(tipo === 'igual') this.calcular()*/
         this.tipoOperacion !== 'igual' && this.calcular()
         if(this.valorActual !== '' && tipo === 'raiz') swal('Datos Incorrecto', 'Ingresa una operacion valida', 'error')
+        if(this.valorActual !== '' && tipo === 'logaritmo') swal('Datos Incorrecto', 'Ingresa una operacion valida', 'error')
+        if(this.valorActual === '' && tipo === 'potencia') swal('Datos Incorrecto', 'Ingresa una base para la potencia', 'error')
         this.tipoOperacion = tipo
         this.valorAnterior = this.valorActual || this.valorAnterior
         this.valorActual = ''
@@ -43,6 +45,11 @@ class Display {
         if(numero === '.' && this.valorActual.includes('.')) return
         if(numero === 'π') {
             this.valorActual = this.calculador.valorpi().toString()
+            this.imprimirValores()
+            return
+        }
+        if(numero === '(-)') {
+            this.valorActual = '-' + this.valorActual.toString()
             this.imprimirValores()
             return
         }
@@ -59,10 +66,11 @@ class Display {
         const valorAnterior = parseFloat(this.valorAnterior)
         const valorActual = parseFloat(this.valorActual)
         
-        if( isNaN(valorActual) || isNaN(valorAnterior)) return 
+        
 
         if(this.tipoOperacion === 'raiz') {
             const r = this.calculador.raiz(parseFloat(this.valorActual))
+            if( isNaN(r)) swal('Operacion Incorrecto', 'Ingresa otra operacion', 'error') 
             if (r % 1 == 0) {
                 this.valorActual = r
                 return
@@ -81,7 +89,8 @@ class Display {
                 return
             }
         }
-   
+        
+        if( isNaN(valorActual) || isNaN(valorAnterior)) return 
 
         
         const num3 = this.calculador[this.tipoOperacion](valorAnterior, valorActual)
